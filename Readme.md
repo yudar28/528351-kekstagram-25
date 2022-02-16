@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Дарья Юдина](https://up.htmlacademy.ru/javascript/25/user/528351).
-* Наставник: `Неизвестно`.
+* Наставник: [Роман Макаров] (https://htmlacademy.ru/profile/deepspiral).
 
 ---
 
