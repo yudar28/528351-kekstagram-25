@@ -1,8 +1,11 @@
 // Функция, возвращающая случайное целое число из переданного диапазона включительно.
 // Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random;
-const getRundomNumber = (min, max) => {
-  if (min < 0 || max <= min) {
-    return undefined;
+const getRundomNumber = (firstNumber, secondNumber) => {
+  let min = firstNumber;
+  let max = secondNumber;
+  if (firstNumber > secondNumber) {
+    min = secondNumber;
+    max = firstNumber;
   }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
