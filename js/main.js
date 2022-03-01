@@ -36,34 +36,27 @@ const MESSAGE = [
   'Имена авторов также должны быть случайными. Набор имён для комментаторов составьте сами. Подставляйте случайное имя в поле name.',
 ];
 
-// Функция, возвращающая массив от 1 до n
-// Источник: https://www.cyberforum.ru/javascript-beginners/thread2832924.html
-const fillArray = (n) => {
-  const arr = [];
-  if (n) {for (let i = 1; i <= n;) {arr.push(i++);}}
-  return arr;
+//Функция, которая возвращает массив перемешенных чисел от 1 до length
+//Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/from
+const getRundomArrayNumber = (length) => {
+  const arr = Array.from({ length: length }, (_v, k) => ++k);
+  return arr.sort(() => Math.random()-0.5);
 };
-
-// Случайное перемешивание элементов в массиве;
-// Источник: https://efim360.ru/javascript-kak-peremeshat-massiv/
-const ARRAY_25_ELEMENTS = fillArray(25).sort(()=>Math.random()-0.5);
-
-const ARRAY_100_ELEMENTS = fillArray(100).sort(()=>Math.random()-0.5);
 
 // Функция, возрвращающая случайный элемент массива
 const getRundomArrayElement = (elements) => elements[getRundomNumber(0, elements.length -1)];
 
-const ARRAY_COMMENTS = [];
+const comments = [];
 
-const createComment = (number) => ({
-  id: number,
+const createComment = (id) => ({
+  id: id,
   avatar: `img/avatar-${getRundomNumber(1,6)}.svg`,
   message: getRundomArrayElement(MESSAGE),
   name: getRundomArrayElement(NAMES),
 });
 
-ARRAY_100_ELEMENTS.forEach((value) => {
-  ARRAY_COMMENTS.push(createComment(value));
+getRundomArrayNumber(100).forEach((value) => {
+  comments.push(createComment(value));
 });
 
 function getRundomArray (arr) {
@@ -79,12 +72,16 @@ const createPhotoDescription = (number) => ({
   url: `photos/${number}.jpg`,
   description: 'Описание фотографии',
   likes: getRundomNumber(15, 200),
-  comments: getRundomArray(ARRAY_COMMENTS),
+  comments: getRundomArray(comments),
 });
 
-const similarDescriptions = [];
+const getPhotosData = (numberPhotos) => {
+  const similarDescriptions = [];
+  getRundomArrayNumber(numberPhotos).forEach((value) => {
+    similarDescriptions.push(createPhotoDescription(value));
+  });
+  return similarDescriptions;
+};
 
-ARRAY_25_ELEMENTS.forEach((value) => {
-  similarDescriptions.push(createPhotoDescription(value));
-});
+getPhotosData(25);
 
