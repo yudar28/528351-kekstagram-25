@@ -58,3 +58,5 @@ const createPhotoDescription = (number) => ({
 const getPhotosData = (count) => getRandomArray(count).map((value) => createPhotoDescription(value));
 
 getPhotosData(25);
+
+export {getPhotosData};
