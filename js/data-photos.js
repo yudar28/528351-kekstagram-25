@@ -1,4 +1,4 @@
-import {getRandomNumber, getRandomArray, getRandomArrayElement} from './util.js';
+import { getRandomNumber, getRandomArray, getRandomArrayElement } from './util.js';
 
 const NAMES = [
   'Иван',
@@ -59,4 +59,4 @@ const getPhotosData = (count) => getRandomArray(count).map((value) => createPhot
 
 getPhotosData(25);
 
-export {getPhotosData};
+export { getPhotosData };

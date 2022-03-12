@@ -1,12 +1,13 @@
-import {getPhotosData} from './data-photos.js';
+import { getPhotosData } from './data-photos.js';
 
 const similarUserPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const usresPhotoList = document.querySelector('.pictures');
+const usersPhotoList = document.querySelector('.pictures');
 
-const similarPhotoDatas = getPhotosData(5);
+const PHOTOS_COUNT = 25;
+const similarPhotoData = getPhotosData(PHOTOS_COUNT);
 const similarListFragment = document.createDocumentFragment();
 
-similarPhotoDatas.forEach(({url, likes, comments}) => {
+similarPhotoData.forEach(({ url, likes, comments }) => {
   const userPhotoElement = similarUserPhotoTemplate.cloneNode(true);
   userPhotoElement.querySelector('.picture__img').src = url;
   userPhotoElement.querySelector('.picture__likes').textContent = likes;
@@ -15,4 +16,6 @@ similarPhotoDatas.forEach(({url, likes, comments}) => {
   similarListFragment.append(userPhotoElement);
 });
 
-usresPhotoList.append(similarListFragment);
+usersPhotoList.append(similarListFragment);
+
+export { usersPhotoList, similarPhotoData };
