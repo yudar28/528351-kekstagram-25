@@ -32,25 +32,33 @@ const createComment = (item) => {
   commentsList.append(newComment);
 };
 
-const getBigPicture = (k) => {
+const openModal = () => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
+};
+
+const closeModal = () => {
+  bigPicture.classList.add('hidden');
+  body.classList.remove('modal-open');
+};
+
+
+const getBigPicture = (count) => {
+  openModal();
 
   commentCouner.classList.add('hidden'); //Временно
   commentLoader.classList.add('hidden'); //Временно
 
-  const PhotoData = similarPhotoData[k];
+  const photoData = similarPhotoData[count];
 
-  bigPictureImg.src = PhotoData.url;
-  bigPictureLikes.textContent = PhotoData.likes;
-  bigPictureCommentsCounter.textContent = PhotoData.comments.length;
-  bigPictureCaption.textContent = PhotoData.description;
+  bigPictureImg.src = photoData.url;
+  bigPictureLikes.textContent = photoData.likes;
+  bigPictureCommentsCounter.textContent = photoData.comments.length;
+  bigPictureCaption.textContent = photoData.description;
 
   commentsList.innerHTML = '';
 
-  similarPhotoData[k].comments.forEach((comment) => {
-    createComment(comment);
-  });
+  photoData.comments.forEach(createComment);
 };
 
 
@@ -60,14 +68,10 @@ useresPhotoItems.forEach((item, i) => {
   });
 });
 
-document.addEventListener('keydown', (e) => {
-  if( e.keyCode === 27 ) {
-    bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
+document.addEventListener('keydown', (evt) => {
+  if( evt.key === 27 ) {
+    closeModal();
   }
 });
 
-buttonCloseBigPicture.addEventListener('click', () => {
-  bigPicture.classList.add('hidden');
-  body.classList.remove('modal-open');
-});
+buttonCloseBigPicture.addEventListener('click', closeModal());
