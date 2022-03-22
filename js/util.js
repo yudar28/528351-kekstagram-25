@@ -23,7 +23,7 @@ const getRandomArray = (length) => {
 };
 
 // Функция, возрвращающая случайный элемент массива
-const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length -1)];
+const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length - 1)];
 
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
