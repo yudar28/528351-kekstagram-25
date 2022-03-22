@@ -1,4 +1,5 @@
 import { usersPhotoList, similarPhotoData } from './users.js';
+import { isEscapeKey } from './util.js';
 
 const useresPhotoItems = Array.from(usersPhotoList.querySelectorAll('.picture'));
 const body = document.querySelector('body');
@@ -69,9 +70,11 @@ useresPhotoItems.forEach((item, i) => {
 });
 
 document.addEventListener('keydown', (evt) => {
-  if( evt.key === 27 ) {
+  if(isEscapeKey(evt)) {
     closeModal();
   }
 });
 
-buttonCloseBigPicture.addEventListener('click', closeModal());
+buttonCloseBigPicture.addEventListener('click', closeModal);
+
+export { body };

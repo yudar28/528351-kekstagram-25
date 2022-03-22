@@ -25,4 +25,6 @@ const getRandomArray = (length) => {
 // Функция, возрвращающая случайный элемент массива
 const getRandomArrayElement = (elements) => elements[getRandomNumber(0, elements.length -1)];
 
-export {getRandomNumber, getRandomArray, getRandomArrayElement};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export { getRandomNumber, getRandomArray, getRandomArrayElement, isEscapeKey };
