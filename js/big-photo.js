@@ -43,7 +43,6 @@ const closeModal = () => {
   body.classList.remove('modal-open');
 };
 
-
 const getBigPicture = (count) => {
   openModal();
 
@@ -62,17 +61,16 @@ const getBigPicture = (count) => {
   photoData.comments.forEach(createComment);
 };
 
-
 useresPhotoItems.forEach((item, i) => {
   item.addEventListener('click', () => {
     getBigPicture(i);
-  });
-});
 
-document.addEventListener('keydown', (evt) => {
-  if(isEscapeKey(evt)) {
-    closeModal();
-  }
+    document.addEventListener('keydown', (evt) => {
+      if(isEscapeKey(evt)) {
+        closeModal();
+      }
+    });
+  });
 });
 
 buttonCloseBigPicture.addEventListener('click', closeModal);
