@@ -61,6 +61,17 @@ effectSlider.noUiSlider.on('update', () => {
   }
 });
 
+const updateSlider = (filterValue, slider) => {
+  slider.noUiSlider.updateOptions({
+    range: {
+      min: filterValue.min,
+      max: filterValue.max
+    },
+    start: filterValue.max,
+    step: filterValue.step
+  });
+};
+
 function onEffectsChange (evt) {
   const selectedFilter = evt.target;
   const filterName = selectedFilter.value;
@@ -77,18 +88,10 @@ function onEffectsChange (evt) {
       const unit = filter.unit;
       previewPhoto.style.filter = `${effect}(${effectValue}${unit})`;
 
-      effectSlider.noUiSlider.updateOptions({
-        range: {
-          min: filter.min,
-          max: filter.max
-        },
-        start: filter.max,
-        step: filter.step
-      });
+      updateSlider(filter, effectSlider);
       effectSlider.classList.remove('visually-hidden');
     } else {
       previewPhoto.style.filter = '';
-
       effectSlider.classList.add('visually-hidden');
     }
   }

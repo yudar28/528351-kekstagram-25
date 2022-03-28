@@ -1,4 +1,4 @@
-import {uploadPhotoForm} from './upload-photo-form.js';
+import { uploadPhotoForm } from './upload-photo-form.js';
 
 const inputHashtags = uploadPhotoForm.querySelector('.text__hashtags');
 const MAX_LENGTH_HASHTAGS = 5;
@@ -51,3 +51,5 @@ uploadPhotoForm.addEventListener('submit', (evt) => {
     evt.target.reset();
   }
 });
+
+export { inputHashtags };

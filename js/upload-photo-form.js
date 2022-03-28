@@ -6,6 +6,9 @@ const uploadPhotoInput = uploadPhotoForm.querySelector('#upload-file');
 const redactorPhoto = uploadPhotoForm.querySelector('.img-upload__overlay');
 const previewPhoto = uploadPhotoForm.querySelector('.img-upload__preview').querySelector('img');
 const buttonCancel = uploadPhotoForm.querySelector('.img-upload__cancel');
+const textComment = uploadPhotoForm.querySelector('.text__description');
+const inputHashtags = uploadPhotoForm.querySelector('.text__hashtags');
+const effectSlider =  uploadPhotoForm.querySelector('.effect-level__slider');
 
 const openFilter = () => {
   redactorPhoto.classList.remove('hidden');
@@ -15,6 +18,13 @@ const openFilter = () => {
 const closeFilter = () => {
   redactorPhoto.classList.add('hidden');
   body.classList.remove('modal-open');
+
+  inputHashtags.value = '';
+  textComment.value = '';
+  previewPhoto.style.filter = '';
+  previewPhoto.className = 'effects__preview--none';
+  previewPhoto.dataset.filterName = '';
+  effectSlider.classList.add('visually-hidden');
 };
 
 uploadPhotoInput.addEventListener('change', () => {
@@ -37,4 +47,4 @@ buttonCancel.addEventListener(('click'), () => {
   uploadPhotoInput.value = '';
 });
 
-export {uploadPhotoForm, previewPhoto};
+export { uploadPhotoForm, previewPhoto };
