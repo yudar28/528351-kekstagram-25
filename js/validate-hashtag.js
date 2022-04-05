@@ -43,13 +43,13 @@ pristine.addValidator(inputHashtags, handlerSameElements, 'Один и тот ж
 
 pristine.addValidator(inputHashtags, handlerHashtag, 'хэш-тег начинается с символа # и может состоять только из букв и чисел');
 
-uploadPhotoForm.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
+// uploadPhotoForm.addEventListener('submit', (evt) => {
+//   const isValid = pristine.validate();
 
-  if (!isValid) {
-    evt.preventDefault();
-    evt.target.reset();
-  }
-});
+//   if (!isValid) {
+//     evt.preventDefault();
+//     evt.target.reset();
+//   }
+// });
 
-export { inputHashtags };
+export { pristine };
