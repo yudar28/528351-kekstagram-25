@@ -9,6 +9,8 @@ const textComment = uploadPhotoForm.querySelector('.text__description');
 const inputHashtags = uploadPhotoForm.querySelector('.text__hashtags');
 const effectSlider =  uploadPhotoForm.querySelector('.effect-level__slider');
 
+const smallPreviewPhotos = Array.from(uploadPhotoForm.querySelectorAll('.effects__preview'));
+
 const openFilterModal = () => {
   redactorPhoto.classList.remove('hidden');
   body.classList.add('modal-open');
@@ -33,6 +35,10 @@ uploadPhotoInput.addEventListener('change', () => {
   }
   //источник: https://ru.stackoverflow.com/questions/1026600/%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%B8%D1%82%D1%8C-%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D1%83-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-input;
   previewPhoto.src = URL.createObjectURL(uploadPhotoInput.files[0]);
+
+  smallPreviewPhotos.forEach((photo) => {
+    photo.style.backgroundImage = `url(${URL.createObjectURL(uploadPhotoInput.files[0])})`;
+  });
 
   document.addEventListener('keydown', (evt) => {
     if(isEscapeKey(evt)) {
