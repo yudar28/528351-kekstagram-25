@@ -6,12 +6,22 @@ import { setUserFormSubmit } from './form.js';
 import './scale-upload-photo.js';
 import './effects.js';
 import { showAlert } from './util.js';
+import { showFilters, hiddenFilters, changeFilter, filterPhoto } from './filtres.js';
+
+// const RERENDER_DELAY = 500;
 
 getData(
   'https://25.javascript.pages.academy/kekstagram/data',
-  renderPhotoDataList,
-  showAlert,
-  'Не удалось загрузить данные с сервера. Повторите попытку'
+  (photos) => {
+    renderPhotoDataList(photos);
+    showFilters();
+    changeFilter();
+    filterPhoto();
+  },
+  () => {
+    showAlert('Не удалось загрузить данные с сервера. Повторите попытку');
+    hiddenFilters();
+  }
 );
 
 setUserFormSubmit(closeFilterModal);

@@ -9,7 +9,7 @@ const messageSuccess = messageSuccessTemplate.cloneNode(true);
 const messageErrorTemplate = document.querySelector('#error').content.querySelector('.error');
 const messageError = messageErrorTemplate.cloneNode(true);
 
-const viewMessageModal = (message, classType) => {
+const showMessageModal = (message, classType) => {
   body.append(message);
 
   const buttonMessage = message.querySelector(`.${classType}__button`);
@@ -45,45 +45,6 @@ const unblockSubmitFormButton = () => {
   submitFormButton.textContent = 'Опубликовать';
 };
 
-// const setUserFormSubmit = (closeForm) => {
-//   uploadPhotoForm.addEventListener('submit', (evt) => {
-//     evt.preventDefault();
-
-//     const isValid = pristine.validate();
-
-//     if (isValid) {
-//       const formData = new FormData(evt.target);
-//       blockSubmitFormButton();
-
-//       fetch(
-//         'https://25.javascript.pages.academy/kekstagram2',
-//         {
-//           method: 'POST',
-//           body: formData,
-//         },
-//       )
-//         .then((response) => {
-//           if (response.ok) {
-//             unblockSubmitFormButton();
-//             closeForm();
-//             viewMessageModal(messageSuccess, 'success');
-//           } else {
-//             unblockSubmitFormButton();
-//             closeForm();
-//             viewMessageModal(messageError, 'error');
-//           }
-//         })
-//         .catch(() => {
-//           unblockSubmitFormButton();
-//           closeForm();
-//           viewMessageModal(messageError, 'error');
-//         });
-
-//       evt.target.reset();
-//     }
-//   });
-// };
-
 const setUserFormSubmit = (closeForm) => {
   uploadPhotoForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -99,12 +60,12 @@ const setUserFormSubmit = (closeForm) => {
         () => {
           unblockSubmitFormButton();
           closeForm();
-          viewMessageModal(messageSuccess, 'success');
+          showMessageModal(messageSuccess, 'success');
         },
         () => {
           unblockSubmitFormButton();
           closeForm();
-          viewMessageModal(messageError, 'error');
+          showMessageModal(messageError, 'error');
         }
       );
 
