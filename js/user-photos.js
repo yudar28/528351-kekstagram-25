@@ -40,6 +40,34 @@ const createComment = (item) => {
   commentsList.append(newComment);
 };
 
+// const renderPhoto = (photoData) => {
+//   const userPhotoElement = similarUserPhotoTemplate.cloneNode(true);
+//   userPhotoElement.querySelector('.picture__img').src = photoData.url;
+//   userPhotoElement.querySelector('.picture__likes').textContent = photoData.likes;
+//   userPhotoElement.querySelector('.picture__comments').textContent = photoData.comments.length;
+
+//   usersPhotoList.append(userPhotoElement);
+
+//   userPhotoElement.addEventListener('click', () => {
+//     openModal();
+
+//     bigPictureImg.src = photoData.url;
+//     bigPictureLikes.textContent = photoData.likes;
+//     bigPictureCommentsCounter.textContent = photoData.comments.length;
+//     bigPictureCaption.textContent = photoData.description;
+
+//     commentsList.innerHTML = '';
+
+//     photoData.comments.forEach(createComment);
+
+//     document.addEventListener('keydown', (evt) => {
+//       if(isEscapeKey(evt)) {
+//         closeModal();
+//       }
+//     });
+//   });
+// };
+
 const renderPhoto = (photoData) => {
   const userPhotoElement = similarUserPhotoTemplate.cloneNode(true);
   userPhotoElement.querySelector('.picture__img').src = photoData.url;
@@ -59,6 +87,33 @@ const renderPhoto = (photoData) => {
     commentsList.innerHTML = '';
 
     photoData.comments.forEach(createComment);
+
+    //Загрузка комментариев при нажатии на кнопку загрузить еще
+    const comments = Array.from(bigPicture.querySelectorAll('.social__comment'));
+    const buttonShowMoreComments = bigPicture.querySelector('.social__comments-loader');
+    const shownNumberComments = bigPicture.querySelector('.comments-number');
+    const MIN_SHOWN_NUMBER_COMMENTS = 5;
+
+    buttonShowMoreComments.classList.remove('hidden');
+    shownNumberComments.textContent = MIN_SHOWN_NUMBER_COMMENTS;
+    // console.log(comments);
+    if (comments.length <= MIN_SHOWN_NUMBER_COMMENTS) {
+      buttonShowMoreComments.classList.add('hidden');
+      shownNumberComments.textContent = comments.length;
+    } else {
+      commentsList.innerHTML = '';
+      const firstComments = comments.slice(0, MIN_SHOWN_NUMBER_COMMENTS);
+      firstComments.forEach((comment) => {
+        commentsList.append(comment);
+      });
+
+      buttonShowMoreComments.addEventListener('click', () => {
+        const anotherComments = comments.slice(MIN_SHOWN_NUMBER_COMMENTS + 1, MIN_SHOWN_NUMBER_COMMENTS + 6);
+        anotherComments.forEach((comment) => {
+          commentsList.append(comment);
+        });
+      });
+    }
 
     document.addEventListener('keydown', (evt) => {
       if(isEscapeKey(evt)) {

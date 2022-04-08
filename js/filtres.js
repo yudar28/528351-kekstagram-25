@@ -1,11 +1,11 @@
-// import { debounce } from './util.js';
+import { debounce } from './util.js';
 const filterSection = document.querySelector('.img-filters');
 
 const filterForm = filterSection.querySelector('.img-filters__form');
 const buttonsOfFilter = Array.from(filterForm.querySelectorAll('.img-filters__button'));
 
 const NUMBER_RANDOM_PHOTOS = 10;
-// const RERENDER_DELAY = 500;
+const RERENDER_DELAY = 5000;
 
 const showFilters = () => {
   filterSection.classList.remove('img-filters--inactive');
@@ -54,27 +54,35 @@ const filterPhoto = () => {
     return numberCommentsB - numberCommentsA;
   };
 
-  const chouseButtonFilter = () => {
-    buttonDefault.addEventListener('click', () => {
-      removePhotos();
-      addPhotos(userPhotos);
-    });
-
-    buttonRandom.addEventListener('click', () => {
-      removePhotos();
-      const rundomUserPhotos = userPhotos.slice().sort(() => Math.random() - 0.5).slice(0, NUMBER_RANDOM_PHOTOS);
-      addPhotos(rundomUserPhotos);
-    });
-
-    buttonDiscussed.addEventListener('click', () => {
-      removePhotos();
-      const discussedPhotos = userPhotos.slice().sort(compareComments);
-      addPhotos(discussedPhotos);
-    });
+  const filterDefault = () => {
+    removePhotos();
+    addPhotos(userPhotos);
   };
 
-  // debounce(chouseButtonFilter(),RERENDER_DELAY);
-  chouseButtonFilter();
+  const filterRandom = () => {
+    removePhotos();
+    const rundomUserPhotos = userPhotos.slice().sort(() => Math.random() - 0.5).slice(0, NUMBER_RANDOM_PHOTOS);
+    addPhotos(rundomUserPhotos);
+  };
+
+  const filterDiscussed = () => {
+    removePhotos();
+    const discussedPhotos = userPhotos.slice().sort(compareComments);
+    addPhotos(discussedPhotos);
+  };
+
+  buttonDefault.addEventListener('click', () => {
+    debounce(filterDefault(), RERENDER_DELAY);
+  });
+
+  buttonRandom.addEventListener('click', () => {
+    debounce(filterRandom(), RERENDER_DELAY);
+  });
+
+  buttonDiscussed.addEventListener('click', () => {
+    debounce(filterDiscussed(), RERENDER_DELAY);
+  });
+
 };
 
 

@@ -7,8 +7,7 @@ import './scale-upload-photo.js';
 import './effects.js';
 import { showAlert } from './util.js';
 import { showFilters, hiddenFilters, changeFilter, filterPhoto } from './filtres.js';
-
-// const RERENDER_DELAY = 500;
+import './comments.js';
 
 getData(
   'https://25.javascript.pages.academy/kekstagram/data',
