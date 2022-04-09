@@ -1,5 +1,7 @@
 import { isEscapeKey, body } from './util.js';
 
+const MIN_SHOWN_NUMBER_COMMENTS = 5;
+
 const similarUserPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const usersPhotoList = document.querySelector('.pictures');
 
@@ -37,40 +39,12 @@ const createComment = (item, index) => {
   newCommentText.textContent = item.message;
   newComment.append(newCommentText);
 
-  if (index >= 5) {
+  if (index >= MIN_SHOWN_NUMBER_COMMENTS) {
     newComment.classList.add('hidden');
   }
 
   commentsList.append(newComment);
 };
-
-// const renderPhoto = (photoData) => {
-//   const userPhotoElement = similarUserPhotoTemplate.cloneNode(true);
-//   userPhotoElement.querySelector('.picture__img').src = photoData.url;
-//   userPhotoElement.querySelector('.picture__likes').textContent = photoData.likes;
-//   userPhotoElement.querySelector('.picture__comments').textContent = photoData.comments.length;
-
-//   usersPhotoList.append(userPhotoElement);
-
-//   userPhotoElement.addEventListener('click', () => {
-//     openModal();
-
-//     bigPictureImg.src = photoData.url;
-//     bigPictureLikes.textContent = photoData.likes;
-//     bigPictureCommentsCounter.textContent = photoData.comments.length;
-//     bigPictureCaption.textContent = photoData.description;
-
-//     commentsList.innerHTML = '';
-
-//     photoData.comments.forEach(createComment);
-
-//     document.addEventListener('keydown', (evt) => {
-//       if(isEscapeKey(evt)) {
-//         closeModal();
-//       }
-//     });
-//   });
-// };
 
 const renderPhoto = (photoData) => {
   const userPhotoElement = similarUserPhotoTemplate.cloneNode(true);
@@ -94,7 +68,6 @@ const renderPhoto = (photoData) => {
 
     const shownNumberComments = bigPicture.querySelector('.comments-number');
     const buttonShowMoreComments = bigPicture.querySelector('.social__comments-loader');
-    const MIN_SHOWN_NUMBER_COMMENTS = 5;
 
     buttonShowMoreComments.classList.remove('hidden');
     shownNumberComments.textContent = MIN_SHOWN_NUMBER_COMMENTS;
@@ -113,7 +86,7 @@ const renderPhoto = (photoData) => {
         buttonShowMoreComments.classList.add('hidden');
         shownNumberComments.textContent = comments.length;
       } else {
-        hiddenComments = hiddenComments.slice(0, 5);
+        hiddenComments = hiddenComments.slice(0, MIN_SHOWN_NUMBER_COMMENTS);
         shownNumberComments.textContent = parseInt(shownNumberComments.textContent, 10) + MIN_SHOWN_NUMBER_COMMENTS;
       }
 

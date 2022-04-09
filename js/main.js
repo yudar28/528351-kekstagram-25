@@ -5,21 +5,19 @@ import './validate-hashtag.js';
 import { setUserFormSubmit } from './form.js';
 import './scale-upload-photo.js';
 import './effects.js';
-import { showAlert } from './util.js';
-import { showFilters, hiddenFilters, changeFilter, filterPhoto } from './filtres.js';
-import './comments.js';
+import { showFilters, hideFilters, initFilters, filterPhoto, showGetDataMessageError } from './filtres.js';
 
 getData(
   'https://25.javascript.pages.academy/kekstagram/data',
   (photos) => {
     renderPhotoDataList(photos);
     showFilters();
-    changeFilter();
+    initFilters();
     filterPhoto();
   },
   () => {
-    showAlert('Не удалось загрузить данные с сервера. Повторите попытку');
-    hiddenFilters();
+    showGetDataMessageError();
+    hideFilters();
   }
 );
 

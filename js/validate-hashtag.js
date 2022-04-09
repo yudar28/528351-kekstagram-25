@@ -1,8 +1,8 @@
 import { uploadPhotoForm } from './upload-photo-form.js';
 
-const inputHashtags = uploadPhotoForm.querySelector('.text__hashtags');
 const MAX_LENGTH_HASHTAGS = 5;
 
+const inputHashtags = uploadPhotoForm.querySelector('.text__hashtags');
 const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const isHashtagValid = (hashtag) => re.test(hashtag);
@@ -42,14 +42,5 @@ pristine.addValidator(inputHashtags, handlerLength, `Максимальное к
 pristine.addValidator(inputHashtags, handlerSameElements, 'Один и тот же хэш-тег не может быть использован дважды');
 
 pristine.addValidator(inputHashtags, handlerHashtag, 'хэш-тег начинается с символа # и может состоять только из букв и чисел');
-
-// uploadPhotoForm.addEventListener('submit', (evt) => {
-//   const isValid = pristine.validate();
-
-//   if (!isValid) {
-//     evt.preventDefault();
-//     evt.target.reset();
-//   }
-// });
 
 export { pristine };
