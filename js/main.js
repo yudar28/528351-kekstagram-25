@@ -8,7 +8,7 @@ import './effects.js';
 import { showFilters, hideFilters, initFilters, filterPhoto, showGetDataMessageError } from './filtres.js';
 
 getData(
-  'https://25.javascript.pages.academy/kekstagram/data2',
+  'https://25.javascript.pages.academy/kekstagram/data',
   (photos) => {
     renderPhotoDataList(photos);
     showFilters();
