@@ -1,11 +1,12 @@
 import {uploadPhotoForm, previewPhoto } from './upload-photo-form.js';
 
-const scaleValue = uploadPhotoForm.querySelector('.scale__control--value');
-const buttonIncreaseScale = uploadPhotoForm.querySelector('.scale__control--bigger');
-const buttonDecreaseScale = uploadPhotoForm.querySelector('.scale__control--smaller');
 const STEP_SCALE = 25;
 const MIN_SCALE = 25;
 const MAX_SCALE = 100;
+
+const scaleValue = uploadPhotoForm.querySelector('.scale__control--value');
+const buttonIncreaseScale = uploadPhotoForm.querySelector('.scale__control--bigger');
+const buttonDecreaseScale = uploadPhotoForm.querySelector('.scale__control--smaller');
 
 let numberScaleValue = parseInt(scaleValue.value.match(/\d+/), 10);
 

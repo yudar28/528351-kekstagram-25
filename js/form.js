@@ -9,6 +9,8 @@ const messageSuccess = messageSuccessTemplate.cloneNode(true);
 const messageErrorTemplate = document.querySelector('#error').content.querySelector('.error');
 const messageError = messageErrorTemplate.cloneNode(true);
 
+const submitFormButton = uploadPhotoForm.querySelector('.img-upload__submit');
+
 const showMessageModal = (message, classType) => {
   body.append(message);
 
@@ -32,8 +34,6 @@ const showMessageModal = (message, classType) => {
     }
   });
 };
-
-const submitFormButton = uploadPhotoForm.querySelector('.img-upload__submit');
 
 const blockSubmitFormButton = () => {
   submitFormButton.disabled = true;

@@ -33,7 +33,7 @@ uploadPhotoInput.addEventListener('change', () => {
   if (uploadPhotoInput.value.length !== 0) {
     openFilterModal();
   }
-  //источник: https://ru.stackoverflow.com/questions/1026600/%D0%BA%D0%B0%D0%BA-%D0%B7%D0%B0%D0%B3%D1%80%D1%83%D0%B7%D0%B8%D1%82%D1%8C-%D0%BA%D0%B0%D1%80%D1%82%D0%B8%D0%BD%D0%BA%D1%83-%D1%87%D0%B5%D1%80%D0%B5%D0%B7-input;
+
   previewPhoto.src = URL.createObjectURL(uploadPhotoInput.files[0]);
 
   smallPreviewPhotos.forEach((photo) => {

@@ -1312,6 +1312,21 @@ main {
   opacity: 0.6;
 }
 
+.get-data-error {
+  z-index: 100;
+  position: absolute;
+  padding: 10px 3px;
+  left: 0;
+  top: 0;
+  right: 0;
+
+  background-color: #e90000;
+
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+}
+
 
 /**
  * Экран загрузки изображения

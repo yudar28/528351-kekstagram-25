@@ -1,4 +1,4 @@
-const getData = (url, onSuccess, onFail) => {
+const getData = (url, onSuccess, onError) => {
   fetch(url)
     .then((response) => {
       if (response.ok) {
@@ -8,15 +8,11 @@ const getData = (url, onSuccess, onFail) => {
       }
     })
     .then((response) => response.json())
-    .then((photos) => {
-      onSuccess(photos);
-    })
-    .catch(() => {
-      onFail();
-    });
+    .then(onSuccess)
+    .catch(onError);
 };
 
-const sentData = (url, body, onSuccess, onFail) => {
+const sentData = (url, body, onSuccess, onError) => {
   fetch(
     url,
     {
@@ -31,9 +27,7 @@ const sentData = (url, body, onSuccess, onFail) => {
         throw new Error;
       }
     })
-    .catch(() => {
-      onFail();
-    });
+    .catch(onError);
 };
 
 export { getData, sentData };
