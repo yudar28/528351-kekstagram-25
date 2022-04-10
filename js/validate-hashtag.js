@@ -41,6 +41,6 @@ pristine.addValidator(inputHashtags, handlerLength, `Максимальное к
 
 pristine.addValidator(inputHashtags, handlerSameElements, 'Один и тот же хэш-тег не может быть использован дважды');
 
-pristine.addValidator(inputHashtags, handlerHashtag, 'хэш-тег начинается с символа # и может состоять только из букв и чисел');
+pristine.addValidator(inputHashtags, handlerHashtag, 'хэш-тег начинается с символа # и может состоять только из букв и чисел, максимальная длина одного хэш-тега 20 символов, включая решётку');
 
 export { pristine };
