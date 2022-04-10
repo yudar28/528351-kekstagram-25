@@ -1,4 +1,4 @@
-import {uploadPhotoForm, previewPhoto } from './upload-photo-form.js';
+import {uploadPhotoForm, previewPhoto, effectFieldset } from './upload-photo-form.js';
 
 const effectSlider =  uploadPhotoForm.querySelector('.effect-level__slider');
 const effectSliderValue = uploadPhotoForm.querySelector('.effect-level__value');
@@ -81,8 +81,10 @@ function onEffectsChange (evt) {
     previewPhoto.dataset.filterName = filterName;
 
     const filter = filters[filterName];
+    effectFieldset.style.display = 'none';
 
     if (filter) {
+      effectFieldset.style.display = 'initial';
       const effect = filter.effect;
       const effectValue = filter.max;
       const unit = filter.unit;
@@ -93,6 +95,7 @@ function onEffectsChange (evt) {
     } else {
       previewPhoto.style.filter = '';
       effectSlider.classList.add('visually-hidden');
+      effectFieldset.style.display = 'none';
     }
   }
 }
