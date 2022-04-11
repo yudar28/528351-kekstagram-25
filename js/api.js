@@ -12,7 +12,7 @@ const getData = (url, onSuccess, onError) => {
     .catch(onError);
 };
 
-const sentData = (url, body, onSuccess, onError) => {
+const sendData = (url, body, onSuccess, onError) => {
   fetch(
     url,
     {
@@ -30,4 +30,4 @@ const sentData = (url, body, onSuccess, onError) => {
     .catch(onError);
 };
 
-export { getData, sentData };
+export { getData, sendData };

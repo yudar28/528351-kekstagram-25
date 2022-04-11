@@ -1,18 +1,18 @@
 import { uploadPhotoForm } from './upload-photo-form.js';
 
 const MAX_LENGTH_HASHTAGS = 5;
+const RE = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 const inputHashtags = uploadPhotoForm.querySelector('.text__hashtags');
-const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
-const isHashtagValid = (hashtag) => re.test(hashtag);
+const isHashtagValid = (hashtag) => RE.test(hashtag);
 
 const isNotSameElements = (hashtags) => {
   const lowercasedHashtags = hashtags.map((element) => element.toLowerCase());
   return hashtags.length === new Set(lowercasedHashtags).size;
 };
 
-const validMaxLength = (hashtags, length) => hashtags.length <= length;
+const validateMaxLength = (hashtags, length) => hashtags.length <= length;
 
 const pristine = new Pristine(uploadPhotoForm, {
   classTo: 'form__element',
@@ -25,7 +25,7 @@ const normalizeHashtags = (value) => {
   return hashtags.filter((element) => element !== '');
 };
 
-const handlerLength = (value) => validMaxLength(normalizeHashtags(value), MAX_LENGTH_HASHTAGS);
+const handlerLength = (value) => validateMaxLength(normalizeHashtags(value), MAX_LENGTH_HASHTAGS);
 
 const handlerSameElements = (value) => isNotSameElements(normalizeHashtags(value));
 

@@ -5,7 +5,7 @@ const MIN_SCALE = 25;
 const MAX_SCALE = 100;
 
 const changeScale = (number) => {
-  previewPhoto.style.transform = `scale(${number/100})`;
+  previewPhoto.style.transform = `scale(${number/MAX_SCALE})`;
 };
 
 buttonIncreaseScale.disabled = true;

@@ -13,14 +13,23 @@ const bigPictureCaption = bigPicture.querySelector('.social__caption');
 const commentsList = bigPicture.querySelector('.social__comments');
 const buttonCloseBigPicture = bigPicture.querySelector('.big-picture__cancel');
 
-const openModal = () => {
+const openBigPicture = () => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
 };
 
-const closeModal = () => {
+const closeBigPicture = () => {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
+
+  // eslint-disable-next-line no-use-before-define
+  document.removeEventListener('keydown', onUserPhotoEscKeydown);
+};
+
+const onUserPhotoEscKeydown = (evt) => {
+  if(isEscapeKey(evt)) {
+    closeBigPicture();
+  }
 };
 
 const createComment = (item, index) => {
@@ -55,7 +64,7 @@ const renderPhoto = (photoData) => {
   usersPhotoList.append(userPhotoElement);
 
   userPhotoElement.addEventListener('click', () => {
-    openModal();
+    openBigPicture();
 
     bigPictureImg.src = photoData.url;
     bigPictureLikes.textContent = photoData.likes;
@@ -95,11 +104,7 @@ const renderPhoto = (photoData) => {
       });
     });
 
-    document.addEventListener('keydown', (evt) => {
-      if(isEscapeKey(evt)) {
-        closeModal();
-      }
-    });
+    document.addEventListener('keydown', onUserPhotoEscKeydown);
   });
 };
 
@@ -109,7 +114,7 @@ const renderPhotoDataList = (similarPhotoData) => {
   });
 };
 
-buttonCloseBigPicture.addEventListener('click', closeModal);
+buttonCloseBigPicture.addEventListener('click', closeBigPicture);
 
 export { usersPhotoList, renderPhotoDataList };
 

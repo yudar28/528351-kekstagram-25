@@ -1,6 +1,6 @@
 import { uploadPhotoForm } from './upload-photo-form.js';
 import { pristine } from './validate-hashtag.js';
-import { sentData } from './api.js';
+import { sendData } from './api.js';
 import { body, isEscapeKey } from './util.js';
 
 const messageSuccessTemplate = document.querySelector('#success').content.querySelector('.success');
@@ -16,21 +16,30 @@ const showMessageModal = (message, classType) => {
 
   const buttonMessage = message.querySelector(`.${classType}__button`);
 
-  buttonMessage.addEventListener('click', () => {
+  const onMessageModalEscKeydown = (evt) => {
+    if (isEscapeKey(evt)) {
+      // eslint-disable-next-line no-use-before-define
+      removeMessageModal(message);
+    }
+  };
+
+  // eslint-disable-next-line no-shadow
+  const removeMessageModal = (message) => {
     message.remove();
+    document.removeEventListener('keydown', onMessageModalEscKeydown);
+  };
+
+  buttonMessage.addEventListener('click', () => {
+    removeMessageModal(message);
   });
 
-  document.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      message.remove();
-    }
-  });
+  document.addEventListener('keydown', onMessageModalEscKeydown);
 
   document.addEventListener('click', (evt) => {
     const inner = message.querySelector(`.${classType}__inner`);
     const click = evt.composedPath().includes(inner);
     if (!click) {
-      message.remove();
+      removeMessageModal(message);
     }
   });
 };
@@ -54,7 +63,7 @@ const setUserFormSubmit = (closeForm) => {
     if (isValid) {
       blockSubmitFormButton();
 
-      sentData(
+      sendData(
         'https://25.javascript.pages.academy/kekstagram',
         new FormData(evt.target),
         () => {
