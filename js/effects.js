@@ -72,7 +72,7 @@ const updateSlider = (filterValue, slider) => {
   });
 };
 
-function onEffectsChange (evt) {
+const onEffectsChange = (evt) => {
   const selectedFilter = evt.target;
   const filterName = selectedFilter.value;
 
@@ -98,6 +98,6 @@ function onEffectsChange (evt) {
       effectFieldset.style.display = 'none';
     }
   }
-}
+};
 
 uploadPhotoForm.addEventListener('change', onEffectsChange);

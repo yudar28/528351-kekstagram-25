@@ -1,5 +1,7 @@
 import { isEscapeKey, body } from './util.js';
 
+const MAX_SCALE_FOR_STYLE = 1;
+
 const uploadPhotoForm = document.querySelector('.img-upload__form');
 const uploadPhotoInput = uploadPhotoForm.querySelector('#upload-file');
 const redactorPhoto = uploadPhotoForm.querySelector('.img-upload__overlay');
@@ -28,7 +30,7 @@ const closeFilterModal = () => {
   effectFieldset.style.display = 'none';
   inputHashtags.value = '';
   textComment.value = '';
-  previewPhoto.style.transform = 'scale(1)';
+  previewPhoto.style.transform = `scale(${MAX_SCALE_FOR_STYLE})`;
   previewPhoto.style.filter = '';
   previewPhoto.className = 'effects__preview--none';
   previewPhoto.dataset.filterName = '';
@@ -36,10 +38,20 @@ const closeFilterModal = () => {
 
   buttonIncreaseScale.disabled = true;
   buttonDecreaseScale.disabled = false;
+
+  // eslint-disable-next-line no-use-before-define
+  document.removeEventListener('keydown', onUploadPhotoEscKeydow);
 };
 
 const isFocusedHashtag = () => document.activeElement === inputHashtags;
 const isFocusedTextComment = () => document.activeElement === textComment;
+
+const onUploadPhotoEscKeydow = (evt) => {
+  if(isEscapeKey(evt) && !isFocusedHashtag() && !isFocusedTextComment()) {
+    closeFilterModal();
+    uploadPhotoInput.value = '';
+  }
+};
 
 uploadPhotoInput.addEventListener('change', () => {
   if (uploadPhotoInput.value.length !== 0) {
@@ -52,12 +64,7 @@ uploadPhotoInput.addEventListener('change', () => {
     photo.style.backgroundImage = `url(${URL.createObjectURL(uploadPhotoInput.files[0])})`;
   });
 
-  document.addEventListener('keydown', (evt) => {
-    if(isEscapeKey(evt) && !isFocusedHashtag() && !isFocusedTextComment()) {
-      closeFilterModal();
-      uploadPhotoInput.value = '';
-    }
-  });
+  document.addEventListener('keydown', onUploadPhotoEscKeydow);
 });
 
 buttonCancel.addEventListener(('click'), () => {

@@ -51,7 +51,7 @@ const filterPhoto = () => {
     return numberCommentsB - numberCommentsA;
   };
 
-  const changePhotosByFilters = (evt) => {
+  const onPhotosChange = (evt) => {
     if (evt.target.matches('#filter-default')) {
       removePhotos();
       addPhotos(userPhotos);
@@ -70,7 +70,7 @@ const filterPhoto = () => {
     }
   };
 
-  filterForm.addEventListener('click', debounce(changePhotosByFilters,RERENDER_DELAY));
+  filterForm.addEventListener('click', debounce(onPhotosChange,RERENDER_DELAY));
 };
 
 const getDataMessageErrorTemplate = document.querySelector('#get-data-error').content.querySelector('.get-data-error');
