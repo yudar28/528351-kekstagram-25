@@ -23,10 +23,20 @@ const showMessageModal = (message, classType) => {
     }
   };
 
+  const onOutsideOfMessageModalClick = (evt) => {
+    const inner = message.querySelector(`.${classType}__inner`);
+    const click = evt.composedPath().includes(inner);
+    if (!click) {
+      // eslint-disable-next-line no-use-before-define
+      removeMessageModal(message);
+    }
+  };
+
   // eslint-disable-next-line no-shadow
   const removeMessageModal = (message) => {
     message.remove();
     document.removeEventListener('keydown', onMessageModalEscKeydown);
+    document.removeEventListener('click', onOutsideOfMessageModalClick);
   };
 
   buttonMessage.addEventListener('click', () => {
@@ -35,13 +45,7 @@ const showMessageModal = (message, classType) => {
 
   document.addEventListener('keydown', onMessageModalEscKeydown);
 
-  document.addEventListener('click', (evt) => {
-    const inner = message.querySelector(`.${classType}__inner`);
-    const click = evt.composedPath().includes(inner);
-    if (!click) {
-      removeMessageModal(message);
-    }
-  });
+  document.addEventListener('click', onOutsideOfMessageModalClick);
 };
 
 const blockSubmitFormButton = () => {
