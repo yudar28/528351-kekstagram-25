@@ -13,12 +13,12 @@ const bigPictureCaption = bigPicture.querySelector('.social__caption');
 const commentsList = bigPicture.querySelector('.social__comments');
 const buttonCloseBigPicture = bigPicture.querySelector('.big-picture__cancel');
 
-const openBigPicture = () => {
+const onBigPictureOpen = () => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
 };
 
-const closeBigPicture = () => {
+const onBigPictureClose = () => {
   bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
 
@@ -28,7 +28,7 @@ const closeBigPicture = () => {
 
 const onUserPhotoEscKeydown = (evt) => {
   if(isEscapeKey(evt)) {
-    closeBigPicture();
+    onBigPictureClose();
   }
 };
 
@@ -64,7 +64,7 @@ const renderPhoto = (photoData) => {
   usersPhotoList.append(userPhotoElement);
 
   userPhotoElement.addEventListener('click', () => {
-    openBigPicture();
+    onBigPictureOpen();
 
     bigPictureImg.src = photoData.url;
     bigPictureLikes.textContent = photoData.likes;
@@ -114,7 +114,7 @@ const renderPhotoDataList = (similarPhotoData) => {
   });
 };
 
-buttonCloseBigPicture.addEventListener('click', closeBigPicture);
+buttonCloseBigPicture.addEventListener('click', onBigPictureClose);
 
 export { usersPhotoList, renderPhotoDataList };
 
